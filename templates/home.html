@@ -1,0 +1,90 @@
+{% extends "index.html" %}
+
+{% block body %}
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      {% for header in table_headers %}
+      <th scope="col"> {{ header }}</th>
+      {% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+  {% for cafe in cafes.cafes %}
+    <tr>
+      <th scope="row"> {{ loop.index }}</th>
+      <td> {{ cafe.name }} </td>
+      <td>{{ cafe.location }}</td>
+      <td>{{ cafe.coffee_price }}</td>
+      <td>{{ cafe.seats }} </td>
+      <td>
+        <a class="btn btn-light" href="{{ url_for('delete_cafe', cafe_id=cafe.id) }}" role="button"><span class="bi bi-trash"></span></a>
+      </td>
+    </tr>
+  {% endfor %}
+
+  </tbody>
+</table>
+
+<div class="container px-4 text-center">
+    <form method="POST" action="{{ url_for('add_cafe') }}" class="row g-3">
+
+        {{ form.csrf_token }}
+        <div class="col-md-3">
+            {{ form.name.label(class="form-label") }}
+            {{ form.name(size=20, class="form-control") }}
+        </div>
+        <div class="col-md-3">
+            {{ form.location.label(class="form-label") }}
+            {{ form.location(size=20, class="form-control") }}
+        </div>
+        <div class="col-md-3">
+            {{ form.coffee_price.label(class="form-label") }}
+            {{ form.coffee_price(size=20, class="form-control") }}
+        </div>
+        <div class="col-md-3">
+            {{ form.seats.label(class="form-label") }}
+            {{ form.seats(size=20, class="form-control") }}
+        </div>
+        <div class="col-md-6">
+            {{ form.map_url.label(class="form-label") }}
+            {{ form.map_url(size=20, class="form-control") }}
+        </div>
+        <div class="col-md-6">
+            {{ form.img_url.label(class="form-label") }}
+            {{ form.img_url(size=20, class="form-control") }}
+        </div>
+        <div class="col-md-3">
+            {{ form.has_toilet.label(class="form-check-label") }}
+            {{ form.has_toilet(size=20, class="form-check-input") }}
+        </div>
+        <div class="col-md-3">
+            {{ form.has_wifi.label(class="form-check-label") }}
+            {{ form.has_wifi(size=20, class="form-check-input") }}
+        </div>
+        <div class="col-md-3">
+            {{ form.has_sockets.label(class="form-check-label") }}
+            {{ form.has_sockets(size=20, class="form-check-input") }}
+        </div>
+        <div class="col-md-3">
+            {{ form.can_take_calls.label(class="form-check-label") }}
+            {{ form.can_take_calls(size=20, class="form-check-input") }}
+        </div>
+
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Add Cafe</button>
+        </div>
+    </form>
+</div>
+
+{% if form.name.errors %}
+  <ul class="errors">
+  {% for error in form.name.errors %}
+      <li>{{ error }}</li>
+  {% endfor %}
+  </ul>
+{% endif %}
+
+{% endblock %}
