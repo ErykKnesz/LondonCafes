@@ -15,7 +15,9 @@
   {% for cafe in cafes.cafes %}
     <tr>
       <th scope="row"> {{ loop.index }}</th>
-      <td> {{ cafe.name }} </td>
+      <td>
+          <button type="button" class="btn btn-link" data-bs-toggle="popover" data-bs-title="{{ cafe.name }}" data-bs-content="<img src='{{ cafe.img_url }}'>">{{ cafe.name }}</button>
+      </td>
       <td>{{ cafe.location }}</td>
       <td>{{ cafe.coffee_price }}</td>
       <td>{{ cafe.seats }} </td>
@@ -26,7 +28,7 @@
   {% endfor %}
 
   </tbody>
-</table>
+    </table>
 
 <div class="container px-4 text-center">
     <form method="POST" action="{{ url_for('add_cafe') }}" class="row g-3">
