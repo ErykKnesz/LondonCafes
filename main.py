@@ -69,6 +69,12 @@ def get_cafe_by_id(cafe_id):
         return jsonify(error={"Not Found": "Sorry, we don't have a cafe with this ID."})
 
 
+def str_to_bool(user_input):
+    if user_input in ["True", "true", "1"]:
+        return True
+    return False
+
+
 # HTTP POST - Create Record
 @app.route("/add", methods=["POST"])
 def add_cafe():
@@ -79,11 +85,11 @@ def add_cafe():
             img_url=request.form["img_url"],
             location=request.form["location"],
             seats=request.form["seats"],
-            has_toilet=bool(request.form["has_toilet"]),
-            has_wifi=bool(request.form["has_wifi"]),
-            has_sockets=bool(request.form["has_sockets"]),
-            can_take_calls=bool(request.form["can_take_calls"]),
-            coffee_price=bool(request.form["coffee_price"])
+            has_toilet=str_to_bool(request.form["has_toilet"]),
+            has_wifi=str_to_bool(request.form["has_wifi"]),
+            has_sockets=str_to_bool(request.form["has_sockets"]),
+            can_take_calls=str_to_bool(request.form["can_take_calls"]),
+            coffee_price=str_to_bool(request.form["coffee_price"])
         )
         db.session.add(new_cafe)
         db.session.commit()
