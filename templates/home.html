@@ -16,13 +16,16 @@
     <tr>
       <th scope="row"> {{ loop.index }}</th>
       <td>
-          <button type="button" class="btn btn-link" data-bs-toggle="popover" data-bs-title="{{ cafe.name }}" data-bs-content="<img src='{{ cafe.img_url }}' width=90% height=90%>" data-bs-html=true>{{ cafe.name }}</button>
+          <button type="button" class="btn btn-link" data-bs-toggle="popover" data-bs-title="{{ cafe.name }}" data-bs-content="<img src='{{ cafe.img_url }}' width=40% height=40%>" data-bs-html=true>{{ cafe.name }}</button>
       </td>
       <td>{{ cafe.location }}</td>
       <td>{{ cafe.coffee_price }}</td>
       <td>{{ cafe.seats }} </td>
       <td>
         <a class="btn btn-light" href="{{ url_for('delete_cafe', cafe_id=cafe.id) }}" role="button"><span class="bi bi-trash"></span></a>
+      </td>
+      <td>
+        <a class="btn btn-light" href="{{ url_for('get_cafe', cafe_id=cafe.id) }}" role="button"><i class="bi bi-info-square-fill"></i></a>
       </td>
     </tr>
   {% endfor %}

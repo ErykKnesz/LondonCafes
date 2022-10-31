@@ -2,4 +2,56 @@
 
 {% block body %}
 
+<div class="container">
+  <div class="row">
+    <div class="col text-center">
+        <h2> {{ cafe.cafe.name }}</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col text-center">
+      <p> {{ cafe.cafe.location }}, coffee for {{ cafe.cafe.coffee_price}}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6 align-self-start">
+      <img src="{{ cafe.cafe.img_url }}" width=90% height=90%>
+    </div>
+    <div class="col-6 justify-content-center text-center">
+      <p>{{ cafe.cafe.seats }} seats</p>
+      <ul class="list-group">
+          <li class="list-group-item"> Toilet:
+            {% if cafe.cafe.has_toilet %}
+            <i class="bi bi-check-lg"></i>
+            {% else %}
+            <i class="bi bi-x"></i>
+            {% endif %}
+          </li>
+          <li class="list-group-item"> Wifi:
+            {% if cafe.cafe.has_wifi %}
+            <i class="bi bi-check-lg"></i>
+            {% else %}
+            <i class="bi bi-x"></i>
+            {% endif %}
+          </li>
+          <li class="list-group-item"> Sockets:
+            {% if cafe.cafe.has_sockets %}
+            <i class="bi bi-check-lg"></i>
+            {% else %}
+            <i class="bi bi-x"></i>
+            {% endif %}
+          </li>
+          <li class="list-group-item"> Calls:
+            {% if cafe.cafe.can_take_calls %}
+            <i class="bi bi-check-lg"></i>
+            {% else %}
+            <i class="bi bi-x"></i>
+            {% endif %}
+          </li>
+      </ul>
+      <a href="{{ cafe.cafe.map_url }}"> See it in Google Maps</a>
+    </div>
+  </div>
+</div>
+
 {% endblock %}
